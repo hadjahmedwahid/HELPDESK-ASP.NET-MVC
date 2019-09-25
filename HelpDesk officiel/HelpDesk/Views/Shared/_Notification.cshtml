@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HelpDesk.Models.Ticket>
+@using HelpDesk.Models;
+@{
+	var _user = Session["user"] ;
+}
+
+@{
+	var list = new List<Ticket>();
+	if (_user.GetType() == typeof(Superviseur))
+	{
+		Superviseur superviseur = Session["user"] as Superviseur;
+		foreach (var item in Model)
+		{
+
+			if (superviseur.direction.IdDirection == item.Categorie.direction.IdDirection && item.EtatTicket!="En cours" && item.EtatTicket != "Cloturé")
+			{
+
+				list.Add(item);
+			}
+		}
+
+	}
+
+	if (_user.GetType() == typeof(TechnicienHelpDesk))
+	{
+		TechnicienHelpDesk technicienHelpDesk = Session["user"] as TechnicienHelpDesk;
+		foreach (var item in Model)
+		{
+
+			if (technicienHelpDesk.categorie.IdCategorie == item.Categorie.IdCategorie && item.EtatTicket != "En cours" && item.EtatTicket != "Cloturé")
+			{
+				list.Add(item);
+			}
+		}
+	}
+}
+@{
+	if (list.Count == 0)
+	{
+
+	}
+	else
+	{
+		<span class="badge blue">@list.Count</span>
+	}
+}
+@*<div>@Model.Count()</div>*@

@@ -1,0 +1,59 @@
+﻿@{
+	HelpDesk.Models.Probleme probleme = new HelpDesk.Models.Probleme();
+	HelpDesk.Models.Solution solution = new HelpDesk.Models.Solution();
+
+}
+		<div class="row">
+			<h3 class="title1">Voulez vous identifier le problème et la solution</h3>
+			<div class="form-three widget-shadow">
+				<div class="form-horizontal">
+
+					@using (Html.BeginForm())
+					{
+						@Html.AntiForgeryToken()
+
+						<div class="form-horizontal">
+							<h4>Probleme</h4>
+							<hr />
+							@{
+								SelectList list = new SelectList(probleme.find_all(), "IdProbleme", "ObjetProbleme");
+
+							}
+
+							<div class="form-group">
+								@Html.LabelFor(model => probleme, htmlAttributes: new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									@Html.DropDownListFor(model => probleme.IdProbleme, list, "Selectionner un probleme")
+									@Html.ValidationMessageFor(model => probleme.IdProbleme, "", new { @class = "text-danger" })
+									<br />
+									
+									
+									
+								</div>
+							</div>
+
+
+
+							<div class="form-group">
+								@Html.LabelFor(model => solution, htmlAttributes: new { @class = "control-label col-md-2" })
+								<div class="col-md-10">
+									@Html.TextAreaFor(model => solution.Description, new { htmlAttributes = new { @class = "text-info" } })
+									@Html.ValidationMessageFor(model => solution.Description, "", new { @class = "text-danger" })
+								</div>
+							</div>
+
+							<div class="form-group">
+								<div class="col-md-offset-2 col-md-10">
+									<input type="submit" value="Valider Solution" class="btn btn-default" />
+								</div>
+							</div>
+						</div>
+					}
+				</div>
+				<div>
+					@Html.ActionLink("Ajouter un Problème", "CreateProbleme","Ticket")
+				</div>
+
+			</div>
+		</div>
+

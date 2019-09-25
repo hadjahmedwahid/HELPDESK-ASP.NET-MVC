@@ -1,0 +1,89 @@
+﻿@model HelpDesk.Models.Utilisateur
+
+@{
+    ViewBag.Title = "Log in";
+}
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+ <html lang="en">
+ <head>
+    <title> Login </title>
+    <!-- Meta tag Keywords -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="Smart Login Form Responsive Widget,Login form widgets, Sign up Web forms , Login signup Responsive web form,Flat Pricing table,Flat Drop downs,Registration Forms,News letter Forms,Elements" />
+    <script type="application/x-javascript">
+         addEventListener("load", function() { setTimeout(hideURLbar, 0); }, false);
+        function hideURLbar(){ window.scrollTo(0,1); } </script>
+    <!-- Meta tag Keywords -->
+    <!-- css files -->
+    <link href="/smart/css/style.css" rel="stylesheet" type="text/css" media="all">
+   
+     </head>
+    <body>
+        <img src="~/smart/images/50ansfr-2.jpg" />
+        <!--header-->
+        <div class="agileheader">
+         
+            <h1>La Banque Nationale d’Algérie</h1>
+        </div>
+        <!--//header-->
+        <!--main-->
+        <div class="main-w3l">
+            <div class="w3layouts-main">
+                <h2>HELP DESK</h2>
+
+                                     @using (Html.BeginForm("Login", "Utilisateur", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                                     {
+                                        @Html.AntiForgeryToken()
+                                        
+                                        <hr />
+                                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                                        <div class="form-group">
+                                           
+                                            <div class="col-md-10">
+                                                @Html.TextBoxFor(m => m.Email, new { @class = "form-control" ,@placeholder = "E-Mail",@type = "email" })
+                                                @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            
+                                                <div class="col-md-10">
+                                                    @Html.PasswordFor(m => m.Password, new { @class = "form-control" , @placeholder = "Mot de Passe" })
+                                                    @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                                </div>
+                                            </div>
+
+                                       
+
+
+
+                                        <span><input type="checkbox" />Remember Me</span>
+                                        
+                                        <div class="form-group">
+                                            <div class="col-md-offset-2 col-md-10">
+                                                <input type="submit" value="Log in" class="btn btn-default" />
+                                            </div>
+                                        </div>
+                                     
+                                        <p>
+                                            @Html.ActionLink("Forgot your password?", "Forgot", "Utilisateur")
+
+
+                                        </p>
+                                     }
+
+
+
+
+                
+            </div>
+        </div>
+      
+
+    </body>
+</html>

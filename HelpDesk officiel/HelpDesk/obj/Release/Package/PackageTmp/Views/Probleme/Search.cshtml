@@ -1,0 +1,60 @@
+﻿@model IEnumerable<HelpDesk.Models.Probleme>
+
+@{
+	var _user = Session["user"];
+}
+
+<div class="media">
+	<h3 class="title1">Base de Connaissance</h3>
+	<div class="bs-example5 widget-shadow" data-example-id="default-media">
+
+		@if (_user.GetType() == typeof(HelpDesk.Models.Superviseur))
+		{
+
+			foreach (var item in Model)
+			{
+				HelpDesk.Models.Superviseur superviseur = Session["user"] as HelpDesk.Models.Superviseur;
+				if (superviseur.direction.IdDirection == item.categorie.direction.IdDirection)
+				{
+					<div class="media">
+						<div class="media-body">
+							<small class="pull-right text-muted">
+								@Html.DisplayFor(modelItem => item.categorie.NomCategorie)
+							</small>
+							<h4 class="media-heading">@Html.DisplayFor(modelItem => item.ObjetProbleme)</h4>
+							@Html.DisplayFor(modelItem => item.DescreptionProbleme)
+						</div>
+						@Html.ActionLink("Voir la Solution", "Details", new { id = item.IdProbleme })
+						<div class="clearfix"> </div>
+					</div>
+				}
+			}
+		}
+		else
+		{
+			if (_user.GetType() == typeof(HelpDesk.Models.TechnicienHelpDesk))
+			{
+
+				foreach (var item in Model)
+				{
+					HelpDesk.Models.TechnicienHelpDesk technicien = Session["user"] as HelpDesk.Models.TechnicienHelpDesk;
+					if (technicien.direction.IdDirection == item.categorie.direction.IdDirection)
+					{
+						<div class="media">
+							<div class="media-body">
+								<small class="pull-right text-muted">
+									@Html.DisplayFor(modelItem => item.categorie.NomCategorie)
+								</small>
+								<h4 class="media-heading">@Html.DisplayFor(modelItem => item.ObjetProbleme)</h4>
+								@Html.DisplayFor(modelItem => item.DescreptionProbleme)
+							</div>
+							@Html.ActionLink("Voir la Solution", "Details", new { id = item.IdProbleme })
+							<div class="clearfix"> </div>
+						</div>
+					}
+				}
+			}
+		}
+	</div>
+</div>
+@Html.ActionLink("Retour","Index","Probleme")

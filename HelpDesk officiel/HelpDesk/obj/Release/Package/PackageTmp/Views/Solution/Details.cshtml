@@ -1,0 +1,43 @@
+﻿@model HelpDesk.Models.Solution
+
+@{
+    ViewBag.Title = "Details";
+}
+<div id="page-wrapper">
+    <div class="main-page">
+        <h2>Details</h2>
+
+        <div>
+            <h4>Solution</h4>
+            <hr />
+            <dl class="dl-horizontal">
+                <dt>
+                    @Html.DisplayNameFor(model => model.IdSolution)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.IdSolution)
+                </dd>
+
+                <dt>
+                    @Html.DisplayNameFor(model => model.Description)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.Description)
+                </dd>
+                <dt>
+                    @Html.DisplayNameFor(model => model.probleme.ObjetProbleme)
+                </dt>
+
+                <dd>
+                    @Html.DisplayFor(model => model.probleme.ObjetProbleme)
+                </dd>
+
+            </dl>
+        </div>
+        <p>
+            @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+            @Html.ActionLink("Back to List", "Index")
+        </p>
+        </div></div>

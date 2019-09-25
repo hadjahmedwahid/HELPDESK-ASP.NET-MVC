@@ -1,0 +1,90 @@
+﻿@model HelpDesk.Models.Categorie
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Categorie</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.IdCategorie)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.IdCategorie)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.NomCategorie)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.NomCategorie)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.ParentCategorie)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.ParentCategorie.NomCategorie)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.DescCategorie)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.DescCategorie)
+		</dd>
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { id = Model.IdCategorie }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>
+
+@if (Model.find_sub_categorie() != null)
+{
+<h5>Liste de Sous Categorie de @Model.NomCategorie</h5>
+<div>
+	<table class="table">
+		<tr>
+
+			<th>
+				@Html.DisplayNameFor(model => model.NomCategorie)
+			</th>
+			<th>
+				@Html.DisplayNameFor(model => model.ParentCategorie)
+			</th>
+
+
+			<th></th>
+		</tr>
+
+		@foreach (var item in Model.find_sub_categorie())
+		{
+			<tr>
+				<td>
+					@Html.DisplayFor(modelItem => item.NomCategorie)
+				</td>
+
+				<td>
+					@Html.DisplayFor(modelItem => item.ParentCategorie.NomCategorie)
+				</td>
+				<td>
+					@Html.ActionLink("Edit", "Edit", new { id = item.IdCategorie }) |
+					@Html.ActionLink("Details", "Details", new { id = item.IdCategorie }) |
+					@Html.ActionLink("Delete", "Delete", new { id = item.IdCategorie })
+				</td>
+			</tr>
+		}
+
+	</table>
+</div>
+}

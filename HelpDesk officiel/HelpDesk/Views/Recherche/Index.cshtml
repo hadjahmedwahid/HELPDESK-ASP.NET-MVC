@@ -1,0 +1,223 @@
+﻿@model HelpDesk.Models.recherche
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="page-wrapper">
+    <div class="main-page">
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-horizontal">
+
+                <hr />
+                <div class="search-box">
+
+                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.chaine, htmlAttributes: new { @class = "control-label col-md-4" })
+                        <div class="col-md-10">
+                            @Html.EditorFor(model => model.chaine, new { htmlAttributes = new { @class = "sb-search-input input__field--madoka", @type = "search", @id = "input-31", @placeholder = "Search..." } })
+                            @Html.ValidationMessageFor(model => model.chaine, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+
+                        <div hidden="hidden">   <input type="submit" value="Rechercher" class="btn btn-default" /></div>
+                    </div>
+                </div>
+            </div>
+        }
+
+
+        @if (Model.tickets.Count() != 0 || Model.problemes.Count() != 0 || Model.solutions.Count() != 0)
+        {
+
+
+            if (Model.tickets.Count() != 0)
+            {
+
+                <h3>Ticket</h3>
+                <table class="table">
+                    <tr bgcolor="#8BC34A">
+                        <th>
+                            IdTicket
+                        </th>
+                        <th>
+                            DateOuverture
+                        </th>
+                        <th>
+                            DateFermeture
+                        </th>
+                        <th>
+                            Objet
+                        </th>
+                        <th>
+                            Description
+                        </th>
+                        <th>
+                            Priorite
+                        </th>
+                        <th>
+                            EtatTicket
+                        </th>
+                        <th></th>
+                    </tr>
+
+                    @foreach (var item in Model.tickets)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.IdTicket)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateOuverture)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateFermeture)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Objet)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Description)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Priorite)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.EtatTicket)
+                            </td>
+                            <td>
+                                @{  String s = "Ticket/details/" + item.IdTicket;
+                                }
+                                <a href=@s>Details</a>
+
+
+                            </td>
+                        </tr>
+                                    }
+
+                </table>
+                                    }
+                                    if (Model.problemes.Count() != 0)
+                                    {
+                                        <h3>Probleme</h3>
+
+
+
+                                        <table class="table">
+                                            <tr bgcolor="#8BC34A">
+                                                <th>
+                                                    ObjetProbleme
+                                                </th>
+                                                <th>
+                                                    DescreptionProbleme
+                                                </th>
+                                                <th></th>
+                                            </tr>
+
+                                            @foreach (var item in Model.problemes)
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.ObjetProbleme)
+                                                    </td>
+                                                    <td>
+                                                        @Html.DisplayFor(modelItem => item.DescreptionProbleme)
+                                                    </td>
+                                                    <td>
+
+                                                        @{  String s = "probleme/details/" + item.IdProbleme;
+                                                        }
+                                                        <a href=@s>Details</a>
+
+                                                    </td>
+                                                </tr>
+                                                            }
+
+                                        </table>
+
+
+                                                            }
+
+                                                            if (Model.solutions.Count() != 0)
+                                                            {
+
+                                                                <h3>Solution</h3>
+                                                                <table class="table">
+                                                                    <tr bgcolor="#8BC34A">
+                                                                        <th>
+                                                                            IdSolution
+                                                                        </th>
+                                                                        <th>
+                                                                            Description
+                                                                        </th>
+                                                                        <th>
+                                                                            probleme
+                                                                        </th>
+                                                                        <th></th>
+                                                                    </tr>
+
+                                                                    @foreach (var item in Model.solutions)
+                                                                    {
+                                                                        <tr>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.IdSolution)
+                                                                            </td>
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.Description)
+                                                                            </td>
+
+                                                                            <td>
+                                                                                @Html.DisplayFor(modelItem => item.probleme.ObjetProbleme)
+                                                                            </td>
+                                                                            <td>
+
+                                                                                @{  String s1 = "Solution/details/" + item.IdSolution;
+                                                                                }
+                                                                                <a href=@s1>Details</a>
+
+                                                                            </td>
+                                                                        </tr>
+                                                                                    }
+
+                                                                </table>
+
+
+
+                                                                                        }
+
+
+                                                                                    }
+                                                                                    else
+                                                                                    { <p align="center">Aucun Result</p> }
+
+
+
+
+
+
+
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+

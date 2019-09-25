@@ -1,0 +1,53 @@
+﻿@using HelpDesk.Models;
+@{
+    var _user = Session["user"];
+}
+@if (_user.GetType() == typeof(Superviseur))
+{
+		<div class="charts">
+			<div class="col-md-4 charts-grids widget">
+				<h4 class="title">Statistiques Ticket</h4>
+				<img class="col-md-pull-12" height="300" width="300" src="home/tick" /><br />
+                <a href="Stat/Index"><i class="fa fa-bar-chart nav_icon"></i>Details</a>
+			</div>
+			<div class="col-md-4 charts-grids widget states-mdl">
+				<h4 class="title">Statistiques Problème</h4>
+				<img class="col-md-pull-12" height="300" width="300" src="home/propie" /><br />
+                <a href="Stat/Index"><i class="fa fa-bar-chart nav_icon"></i>Details</a>
+			</div>
+			<div class="col-md-4 charts-grids widget">
+				<h4 class="title">Statistiques Techniciens</h4>
+				<img class="col-md-pull-12" height="300" width="300" src=home/charttechniciencolumn /><br />
+                <a href="Stat/Index"><i class="fa fa-bar-chart nav_icon"></i>Details</a>
+			</div>
+			<div class="clearfix"> </div>
+		</div>
+		<div class="row">
+			<div id="ticketsTable"></div>
+		</div>
+			<div class="clearfix"> </div>		
+	<div class="row calender widget-shadow">
+			<h4 class="title">Calender</h4>
+        <div class="cal2">
+        </div>
+		</div>
+		<div class="clearfix"> </div>
+}
+
+
+	@if (_user.GetType() == typeof(TechnicienHelpDesk))
+    {
+        TechnicienHelpDesk technicienHelpDesk = Session["user"] as TechnicienHelpDesk;
+        
+                <div class="row">
+                    <div id="ticketsTable"></div>
+                </div>
+        
+    }
+            @if (_user.GetType() == typeof(EmployeAgence))
+            {
+                EmployeAgence technicienHelpDesk = Session["user"] as EmployeAgence;
+
+               
+
+            }

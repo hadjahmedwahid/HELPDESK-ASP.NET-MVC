@@ -1,0 +1,224 @@
+﻿@model HelpDesk.Models.allobjet
+
+@{
+    ViewBag.Title = "Statistique";
+    String s = ViewBag.date;
+    ViewBag.date2 = s;
+}
+
+        <h2>Statistique</h2>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.StatByTechnicien.date, htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @* @Html.EditorFor(model => model.StatByTechnicien.date, new { htmlAttributes = new { @class = "form-control" } })*@
+                    @Html.ValidationMessageFor(model => model.StatByTechnicien.date, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+
+
+            SelectList list = new SelectList(Model.dayliste(), "day");
+            SelectList list1 = new SelectList(Model.monthliste(), "month");
+            SelectList list2 = new SelectList(Model.yearliste(), "year");
+
+            <div class="form-group">
+
+
+                @Html.DropDownListFor(model => model.day, list, "Selectionner le jour")
+                @Html.ValidationMessageFor(model => model.day, "", new { @class = "text-danger" })
+
+
+
+                @Html.DropDownListFor(model => model.month, list1, "Selectionner le mois")
+                @Html.ValidationMessageFor(model => model.month, "", new { @class = "text-danger" })
+
+
+
+                @Html.DropDownListFor(model => model.year, list2, "Selectionner l'année")
+                @Html.ValidationMessageFor(model => model.year, "", new { @class = "text-danger" })
+
+            </div>
+
+
+
+
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+
+
+        }
+
+        <hr />
+
+
+@{
+    if (ViewBag.val3 != 0)
+    {
+        <h3>Technicien</h3>
+
+
+
+        <table border="1" class="table">
+            <tr bgcolor="#8BC34A">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByTechnicien.tichnicien.IdUser)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByTechnicien.tichnicien.Nom)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByTechnicien.NbTick)
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model.StatByTechnicien.find_all(@s))
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tichnicien.IdUser)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.tichnicien.Nom)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NbTick)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+        <img src="charttechniciencolumn/" /><img src="charttechnicienpie" />
+        <hr />
+
+
+
+
+
+    }}
+
+
+
+
+
+
+
+
+        @{ 
+            if (ViewBag.val2 != 0)
+            {
+        <h3>Probleme</h3>
+        <table border="1" class="table">
+            <tr bgcolor="#8BC34A">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByProbleme.probleme.IdProbleme)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByProbleme.probleme.ObjetProbleme)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByProbleme.Nbp)
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model.StatByProbleme.find_all(@s))
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.probleme.IdProbleme)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.probleme.ObjetProbleme)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Nbp)
+                    </td>
+
+
+                </tr>
+            }
+
+        </table>
+        <img src="pro" /> <img src="propie" />
+        <hr />
+
+
+            }
+            }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@{
+    if (ViewBag.val4 != 0)
+    {
+
+
+        <h3>Ticket</h3>
+        <table border="1" class="table">
+            <tr bgcolor="#8BC34A">
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByTicket.etatticket)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.StatByTicket.NbTick)
+                </th>
+
+
+            </tr>
+
+            @foreach (var item in Model.StatByTicket.find_all(@s))
+            {
+                <tr>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.etatticket)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NbTick)
+                    </td>
+
+
+
+
+                </tr>
+            }
+
+        </table>
+        <img src="tick" /><img src="TicketPie" />  }
+    }
+

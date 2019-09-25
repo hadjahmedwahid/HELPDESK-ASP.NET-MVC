@@ -1,0 +1,75 @@
+﻿@model HelpDesk.Models.Ticket
+
+@{
+    ViewBag.Title = "ticket_em";
+    int iduser = (Session["user"] as HelpDesk.Models.Utilisateur).IdUser;
+}
+
+<h2>Ticket :</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr bgcolor="#8BC34A">
+        <th>
+            @Html.DisplayNameFor(model => model.IdTicket)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateOuverture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateFermeture)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Objet)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Description)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Priorite)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EtatTicket)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.find_all()) {
+    if (item.Expediteur.IdUser == iduser && item.EtatTicket != "Cloturé") { 
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.IdTicket)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateOuverture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateFermeture)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Objet)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Priorite)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EtatTicket)
+        </td>
+        <td>
+            @{
+                Session["ticket"] = item;
+             }
+            <a href="http://localhost:58737/Ticket/Resoudre/">Details</a>
+            
+           
+        </td>
+    </tr> 
+                    }
+                }
+
+</table>

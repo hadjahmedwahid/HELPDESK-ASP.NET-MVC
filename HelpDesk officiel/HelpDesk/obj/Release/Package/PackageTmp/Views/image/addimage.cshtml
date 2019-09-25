@@ -1,0 +1,57 @@
+﻿@model HelpDesk.PieceJoint
+
+@{
+    ViewBag.Title = "addimage";
+}
+
+
+
+@using (Html.BeginForm("addimage","image",FormMethod.Post,new { enctype="multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>PieceJoint</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.img, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+              <input type="file" id="image1" name="image1" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+  
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+<hr/>
+<h3>Liste des PieceJoint :</h3>
+<table border="1"  class="table">
+    <tr bgcolor="#8BC34A">
+        <th>File</th>
+        <th>Ouvrire</th>
+    </tr>
+
+    @foreach (var item in ViewBag.list)
+    {
+       // if((Session["ticket"] as HelpDesk.Models.Ticket).IdTicket == item)
+        <tr>
+            <td >@item.nf</td>
+            <td>      <a href="GetFile/@item.idf" target="_blank">  open   </a> </td>  
+                                                                     
+        </tr>
+
+
+
+    }
+</table>

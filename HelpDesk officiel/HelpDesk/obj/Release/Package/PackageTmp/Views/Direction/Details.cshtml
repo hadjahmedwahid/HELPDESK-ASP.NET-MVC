@@ -1,0 +1,43 @@
+﻿@model HelpDesk.Models.Direction
+
+@{
+	ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+	<h4>Direction</h4>
+	<hr />
+	<dl class="dl-horizontal">
+		<dt>
+			@Html.DisplayNameFor(model => model.IdDirection)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.IdDirection)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.NomDirection)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.NomDirection)
+		</dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Libelle)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Libelle)
+		</dd>
+
+
+	</dl>
+</div>
+<p>
+	@Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+	@Html.ActionLink("Back to List", "Index")
+</p>

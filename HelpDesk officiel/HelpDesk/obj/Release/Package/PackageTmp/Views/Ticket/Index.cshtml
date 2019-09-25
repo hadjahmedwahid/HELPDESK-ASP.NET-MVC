@@ -1,0 +1,45 @@
+﻿@model HelpDesk.Models.Ticket
+
+@{
+	ViewBag.Title = "Ticket Page";
+}
+<h3 class="title1">Liste des tickets :</h3>
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+
+		<hr />
+		<div class="search-box">
+
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				@Html.Label("Rechercher", htmlAttributes: new { @class = "control-label col-md-4" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.Objet, new { htmlAttributes = new { @class = "sb-search-input input__field--madoka", @type = "search", @id = "input-31", @placeholder = "Rechercher..." } })
+					@Html.ValidationMessageFor(model => model.Objet, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+
+
+
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+
+				<div hidden="hidden">   <input type="submit" value="Rechercher" class="btn btn-default" /></div>
+			</div>
+		</div>
+	</div>
+}
+
+
+<div class="row">
+	<div class="col-md-12">
+		<div id="MyticketsTable"></div>
+	</div>
+</div>
+

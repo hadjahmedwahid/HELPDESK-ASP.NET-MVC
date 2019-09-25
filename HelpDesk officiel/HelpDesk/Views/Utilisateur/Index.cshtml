@@ -1,0 +1,28 @@
+﻿@model HelpDesk.Models.Utilisateur
+
+@using GridMvc.Html
+
+@{
+	ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+@Html.Grid(Model.find_all()).Columns(columns =>
+{
+	
+	columns.Add(foo => foo.Nom).Titled("Nom").Sortable(true);
+	columns.Add(foo => foo.Prenom).Titled("Prenom").Sortable(true);
+	columns.Add(foo => foo.Login).Titled("Login").Sortable(true);
+	columns.Add(foo => foo.Password).Titled("Password").Sortable(true);
+	columns.Add(foo => foo.Email).Titled("Email").Sortable(true);
+	columns.Add(foo => foo.Phone).Titled("Phone").Sortable(true);
+	columns.Add(foo => foo.EtatUser).Titled("EtatUser").Sortable(true);
+
+}
+
+
+).WithPaging(10)

@@ -1,0 +1,53 @@
+﻿@model HelpDesk.Models.DRE
+
+@{
+	ViewBag.Title = "Index";
+}
+		<div class="panel-body widget-shadow">
+			<h2>Index</h2>
+
+			<p>
+				@Html.ActionLink("Create New", "Create")
+			</p>
+			<table class="table">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.NumeroDRE)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.NomDRE)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Wilaya)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.AdresseDRE)
+					</th>
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model.find_all())
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.NumeroDRE)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.NomDRE)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Wilaya)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.AdresseDRE)
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.NumeroDRE }) |
+							@Html.ActionLink("Details", "Details", new { id = item.NumeroDRE }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.NumeroDRE })
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>

@@ -1,0 +1,58 @@
+﻿@model HelpDesk.Models.Agence
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Agence</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.IdAgence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IdAgence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.NomAgence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.NomAgence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdresseAgence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdresseAgence)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.WilayaAgence)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.WilayaAgence)
+        </dd>
+
+		<dt>
+			@Html.DisplayNameFor(model => model.Dre.NomDRE)
+		</dt>
+
+		<dd>
+			@Html.DisplayFor(model => model.Dre.NomDRE)
+		</dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new {id=Model.IdAgence }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

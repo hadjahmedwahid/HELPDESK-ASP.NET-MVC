@@ -1,0 +1,36 @@
+﻿@model HelpDesk.Models.Probleme
+
+@{
+	ViewBag.Title = "Details";
+}
+<div class="media">
+	<div class="media-body">
+		<strong class="pull-right text-muted">
+			@Html.DisplayFor(model => model.categorie.NomCategorie)
+		</strong>
+		<h4 class="media-heading">@Html.DisplayFor(modelItem => Model.ObjetProbleme)</h4>
+		@Html.DisplayFor(modelItem => Model.DescreptionProbleme)
+	</div>
+	<div class="clearfix"> </div>
+</div>
+<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+	<h4 class="title2"> Solutions :</h4>
+
+	@foreach (var item in Model.find_solution())
+	{
+			<div class="panel panel-success">
+				<div class="panel-heading" role="tab" id="headingOne">
+					<h4 class="panel-title">
+						<a role="button" data-toggle="collapse" data-parent="#accordion" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+							Solution
+						</a>
+					</h4>
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div class="panel-body">
+                       @Html.DisplayFor(modelItem => item.Description)
+					</div>
+				</div>
+			</div>
+	}
+</div>		

@@ -1,0 +1,111 @@
+﻿@{
+	HelpDesk.Models.Utilisateur user = Session["user"] as HelpDesk.Models.Utilisateur;
+}
+
+
+<div class="sticky-header header-section ">
+	<div class="header-left">
+		<!--toggle button start-->
+		<button id="showLeftPush"><i class="fa fa-bars"></i></button>
+		<!--toggle button end-->
+		<!--logo -->
+		<div class="logo">
+			<a href="http://localhost:58737/Home">
+				<h1>BNA</h1>
+				<span>HelpDesk</span>
+			</a>
+		</div>
+		<!--//logo-->
+		<!--search-box-->
+		<div class="search-box">
+			
+		</div><!--//end-search-box-->
+		<div class="clearfix"> </div>
+	</div>
+	<div class="header-right">
+		<div class="profile_details_left">
+			<!--notifications of menu start -->
+			<ul class="nofitications-dropdown">
+				<li class="dropdown head-dpdn">
+					&nbsp; @Html.ActionLink("Nouveau Ticket", "Create", "Ticket") &nbsp;
+				</li>
+				<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i id="msg" class="fa fa-envelope"></i></a>
+					<ul class="dropdown-menu">
+						<li>
+							<div class="notification_header">
+								<h3>You have 3 new messages</h3>
+							</div>
+						</li>
+						
+						<li>
+							<div class="notification_bottom">
+								<a href="#">See all messages</a>
+							</div>
+						</li>
+					</ul>
+				</li>
+				<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i id="count" class="fa fa-bell"></i></a>
+					<ul id="notification" class="dropdown-menu" style="width: 200px; height: 200px; overflow: auto"></ul>
+						
+</li>
+				<li class="dropdown head-dpdn">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false"><i class="fa fa-tasks"></i><span class="badge blue1">15</span></a>
+					<ul class="dropdown-menu">
+						<li>
+							<div class="notification_header">
+								<h3>You have 8 pending task</h3>
+							</div>
+						</li>
+						
+						
+						
+						
+						<li>
+							<div class="notification_bottom">
+								<a href="#">See all pending tasks</a>
+							</div>
+						</li>
+					</ul>
+				</li>
+			</ul>
+			<div class="clearfix"> </div>
+		</div>
+		<!--notification menu end -->
+		<div class="profile_details">
+			<ul>
+				<li class="dropdown profile_details_drop">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+						<div class="profile_img">
+							<span class="prfil-img"><img src="images/a.png" alt=""> </span>
+							<div class="user-name">
+								<p>@user.Nom</p>
+								<p>@user.EtatUser</p>
+								<span></span>
+							</div>
+							<i class="fa fa-angle-down lnr"></i>
+							<i class="fa fa-angle-up lnr"></i>
+							<div class="clearfix"></div>
+						</div>
+					</a>
+					@{
+						String ss = "http://localhost:58737/" + user.EtatUser+"/Details/" + user.IdUser;
+						String sss = "http://localhost:58737/" + user.EtatUser + "/Edit/" + user.IdUser;
+					 }
+					
+						<ul class="dropdown-menu drp-mnu">
+							<li> <a href=@sss><i class="fa fa-cog"></i>Paramètre</a> </li>
+							<li> <a href=@ss><i class="fa fa-user"></i> Profile</a> </li>
+							<li><a href=@Url.Action("Logout", "Utilisateur")><i class="fa fa-sign-out"></i>Déconnexion</a> </li>
+						</ul>
+					
+				</li>
+			</ul>
+		</div>
+		<div class="clearfix"> </div>
+	</div>
+	<div class="clearfix"> </div>
+</div>
+
+

@@ -1,0 +1,48 @@
+﻿@model HelpDesk.Models.Categorie
+
+@{
+	ViewBag.Title = "Index";
+}
+
+		<div class="panel-body widget-shadow">
+			<h2>Index</h2>
+
+			<p>
+				@Html.ActionLink("Create New", "Create")
+			</p>
+			<table class="table">
+				<tr>
+
+					<th>
+						@Html.DisplayNameFor(model => model.NomCategorie)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.ParentCategorie)
+					</th>
+
+
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model.find_all())
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.NomCategorie)
+						</td>
+
+						<td>
+							@Html.DisplayFor(modelItem => item.ParentCategorie.NomCategorie)
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.IdCategorie }) |
+							@Html.ActionLink("Details", "Details", new { id = item.IdCategorie }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.IdCategorie })
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+
+

@@ -1,0 +1,52 @@
+﻿@using HelpDesk.Models;
+@{
+	Utilisateur user = Session["user"] as Utilisateur;
+}
+
+@if (user != null)
+{
+	using (Html.BeginForm("Logout", "Utilisateur", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+	{
+		@Html.AntiForgeryToken()
+
+
+        <ul class="nav navbar-nav navbar-right">
+
+            <li>
+
+          
+
+               
+
+            </li>
+            <li>@Html.ActionLink("Notification", "Index", "Ticket")</li>
+          
+
+            <li><a href="javascript:document.getElementById('logoutForm').submit()"> &nbsp; &nbsp; Log off</a></li>
+        </ul>
+
+         
+		
+	}
+}
+@if (user.EtatUser != "employerAgence")
+{
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+			<li>@Html.ActionLink("Ouvrir Nouveau Ticket", "Create", "Ticket")</li>
+		</ul>
+
+	</div>
+
+	
+}
+else
+{
+	<div class="navbar-collapse collapse">
+		<ul class="nav navbar-nav">
+
+			<li>@Html.ActionLink("Ouvrir Nouveau Ticket", "Create", "Ticket")</li>
+		</ul>
+
+	</div>
+}

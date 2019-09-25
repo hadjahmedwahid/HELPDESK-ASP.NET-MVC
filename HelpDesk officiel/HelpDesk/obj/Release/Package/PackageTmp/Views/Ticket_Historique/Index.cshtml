@@ -1,0 +1,43 @@
+﻿@model HelpDesk.Models.Ticket_Historique
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Etat)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Date)
+        </th>
+		<th>
+			@Html.DisplayNameFor(model => model.Technicien)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Ticket)
+		</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model.find_all()) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Etat)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Date)
+        </td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Technicien.Nom)
+		</td>
+		<td>
+			@Html.DisplayFor(modelItem => item.Ticket.Objet)
+		</td>
+    </tr>
+}
+
+</table>

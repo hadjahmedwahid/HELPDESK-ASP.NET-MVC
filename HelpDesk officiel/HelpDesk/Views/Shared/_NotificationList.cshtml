@@ -1,0 +1,152 @@
+﻿@model IEnumerable<HelpDesk.Models.Ticket>
+@using HelpDesk.Models;
+@{
+	var _user = Session["user"];
+}
+
+	@{
+		var list = new List<Ticket>();
+		if (_user.GetType() == typeof(Superviseur))
+		{
+			Superviseur superviseur = Session["user"] as Superviseur;
+			foreach (var item in Model)
+			{
+
+				if (superviseur.direction.IdDirection == item.Categorie.direction.IdDirection && item.EtatTicket != "En cours" && item.EtatTicket != "Cloturé")
+				{
+					list.Add(item);
+				}
+			}
+			<li>
+				<div class="notification_header">
+					@if (list.Count == 0)
+					{
+
+					}
+					else
+					{
+					<h3>vous avez @list.Count nouvelles notifications</h3>
+					}
+				</div>
+			</li>
+						foreach (var item in Model)
+						{
+							var url = "Ticket/Details/" + item.IdTicket;
+							if (superviseur.direction.IdDirection == item.Categorie.direction.IdDirection && item.EtatTicket != "En cours" && item.EtatTicket != "Cloturé")
+							{
+					<li class="odd">
+						<a href="@url">
+							<div class="notification_desc">
+								<p>
+								@item.Categorie.NomCategorie : @item.Objet
+								</p>
+								<p> 
+									@{var d = DateTime.Now - item.DateOuverture; var j = d.Days; var h = d.Hours; var m = d.Minutes;
+									if (j != 0)
+									{
+										<span>il y @j jours</span>
+									}
+									else
+									{
+										if (h != 0)
+										{
+											<span>il y @h   heures</span>
+										} 
+										else
+										{
+
+										if (m != 0)
+										{
+												<span>il y @m  minutes</span>
+                                            }
+											else
+											{
+												<span> il y un instant </span >
+                                            }
+										    }
+									    }
+									}
+									}
+								</p>
+							</div>
+							<div class="clearfix"></div>
+						</a>
+					</li>
+				}
+			}
+
+			<li>
+				<div class="notification_bottom">
+				</div>
+			</li>
+										}
+										if (_user.GetType() == typeof(TechnicienHelpDesk))
+										{
+											TechnicienHelpDesk technicienHelpDesk = Session["user"] as TechnicienHelpDesk;
+											foreach (var item in Model)
+											{
+
+												if (technicienHelpDesk.categorie.IdCategorie == item.Categorie.IdCategorie && item.EtatTicket != "En cours" && item.EtatTicket != "Cloturé")
+												{
+													list.Add(item);
+												}
+											}
+											<li>
+												<div class="notification_header">
+													@if (list.Count == 0)
+													{
+
+													}
+													else
+													{
+														<h3>vous avez @list.Count nouvelles notifications</h3>
+}
+												</div>
+											</li>foreach (var item in Model)
+											{
+												var url = "Ticket/Details/" + item.IdTicket;
+												if (technicienHelpDesk.categorie.IdCategorie == item.Categorie.IdCategorie && item.EtatTicket != "En cours" && item.EtatTicket != "Cloturé")
+												{
+													<li class="odd">
+														<a href="@url">
+															<div class="user_img"><img src="images/2.png" alt=""></div>
+															<div class="notification_desc">
+																<p>
+																	@item.Categorie.NomCategorie : @item.Objet
+																</p>
+																<p>
+																	@{var d = DateTime.Now - item.DateOuverture; var j = d.Days; var h = d.Hours; var m = d.Minutes;  }
+																	@if (j != 0)
+																	{
+																		<span>il y @j jours</span>
+}
+																	else
+																	{
+																		if (h != 0)
+																		{
+																			<span>il y @h   heures</span>
+}
+																		else
+																		{
+
+																			if (m != 0)
+																			{
+																				<span>il y @m  minutes</span>
+}
+																			else
+																			{
+																				<span> il y un instant </span>
+}
+																		}
+																	}
+																	}
+																</p>
+															</div>
+															<div class="clearfix"></div>
+														</a>
+													</li>							}
+																			}
+																		}
+	}
+
+	

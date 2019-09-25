@@ -1,0 +1,111 @@
+﻿<script>
+	$('.tree-toggle').click(function () {
+		$(this).parent().children('ul.tree').toggle(200);
+	});
+	$(function () {
+		$('.tree-toggle').parent().children('ul.tree').toggle(200);
+	})
+</script>
+
+
+
+@using HelpDesk.Models;
+@{
+	Utilisateur user = Session["user"] as Utilisateur;
+}
+
+	<!-- Sidebar -->
+<ul class="nav nav-list nav-tabs">
+
+    	@if (user != null)
+		{
+			@*<li>
+				<label id="myNav" class="tree-toggler nav-header">
+				@Html.ActionLink("Profile", "Profile", "Utilisateur", new { @id = "myNav" })
+				</label>
+		    </li>*@
+
+		}
+
+		@if (user != null && user.EtatUser == "Superviseur")
+		{
+
+			<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section class="sidebar">
+
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu">
+						<li class="header">Barre de Navigation</li>
+						<li class="treeview">
+							<label id="myNav" class="tree-toggler nav-header">Tableau de Board</label>
+							<ul class="nav nav-list tree">
+								<li>@Html.ActionLink("Accueil", "Index", "Home")</li>
+								<li>@Html.ActionLink("Liste des Tickets", "Index", "Ticket")</li>
+								<li>@Html.ActionLink("Statistiques", "Index", "Stat")</li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<label id="myNav" class="tree-toggler nav-header">Base de Données</label>
+							<ul class="nav nav-list tree">
+								<li>@Html.ActionLink("Catégories", "Index", "Categorie")</li>
+								<li>@Html.ActionLink("DRE", "Index", "DRE")</li>
+								<li>@Html.ActionLink("Directions", "Index", "Direction")</li>
+								<li>@Html.ActionLink("Agences", "Index", "Agence")</li>
+							</ul>
+						</li>
+						<li class="treeview">
+							<label id="myNav" class="tree-toggler nav-header">Gestion des Utilisateurs</label>
+							<ul class="nav nav-list tree">
+								<li>@Html.ActionLink("Superviseurs", "Index", "Superviseur")</li>
+								<li>@Html.ActionLink("Techniciens de HelpDesk", "Index", "TechnicienHelpDesk")</li>
+								<li>@Html.ActionLink("Techniciens de DRE", "Index", "TechnicienDRE")</li>
+								<li>@Html.ActionLink("Employée d'Agence", "Index", "EmployeAgence")</li>
+							</ul>
+						</li>
+					</ul>
+
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+		}
+
+        @if (user != null && user.EtatUser == "TechnicienHelpDesk")
+		{
+				<!-- Left side column. contains the logo and sidebar -->
+			<aside class="main-sidebar">
+				<!-- sidebar: style can be found in sidebar.less -->
+				<section class="sidebar">
+
+					<!-- sidebar menu: : style can be found in sidebar.less -->
+					<ul class="sidebar-menu">
+						<li class="header">Barre de Navigation</li>
+						<li class="treeview">
+							<label id="myNav" class="tree-toggler nav-header">Tableau de Board</label>
+							<ul class="nav nav-list tree">
+								<li>@Html.ActionLink("Liste des Tickets", "Index", "Ticket")</li>
+								<li>@Html.ActionLink("Statistiques", "Index", "Stat")</li>
+							</ul>
+						</li>
+					</ul>
+
+				</section>
+				<!-- /.sidebar -->
+			</aside>
+		}
+</ul>
+
+<script >
+	$(document).ready(function () {
+		$('label.tree-toggler').click(function () {
+			$(this).parent().children('ul.tree').toggle(300);
+		});
+	});
+</script>
+<style>
+	#myNav {
+		color: #ffffff;
+	}
+
+</style>

@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="HELPDESK3ModelStoreContainer" CdmEntityContainer="HELPDESK3Entities">
+    <EntitySetMapping Name="PieceJoint">
+      <EntityTypeMapping TypeName="HELPDESK3Model.PieceJoint">
+        <MappingFragment StoreEntitySet="PieceJoint">
+          <ScalarProperty Name="IdPiece" ColumnName="IdPiece" />
+          <ScalarProperty Name="img" ColumnName="img" />
+          <ScalarProperty Name="filename" ColumnName="filename" />
+          <ScalarProperty Name="type" ColumnName="type" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

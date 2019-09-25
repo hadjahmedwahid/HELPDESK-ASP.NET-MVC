@@ -1,0 +1,20 @@
+﻿@model HelpDesk.Models.Ticket
+
+<ul id="notiContent">
+	@foreach (var item in Model.find_where_not_in())
+	{
+
+		<li>
+			
+			@{var link = "Ticket/Details/" + item.IdTicket;
+				<a href="@link"> 
+				@Html.DisplayNameFor(model => model.Objet):	@Html.DisplayFor(modelItem => item.Objet) |
+				@Html.DisplayNameFor(model => model.DateOuverture): @Html.DisplayFor(modelItem => item.DateOuverture)
+				</a>
+	}
+				</li>
+	}
+</ul>
+<div id="c">@Model.find_where_not_in().Count</div>
+
+@Styles.Render("~/Content/css")

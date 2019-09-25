@@ -1,0 +1,53 @@
+﻿@model IEnumerable<HelpDesk.Models.Message>
+
+<p>
+	@Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+	<tr>
+		<th>@Html.DisplayNameFor(model => model.IdMessage)</th>
+		<th>
+			@Html.DisplayNameFor(model => model.ContentMessage)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.EtatMessage)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.DateMessage)
+		</th>
+		<th>
+			@Html.DisplayNameFor(model => model.Envoyeur)
+		</th>
+
+		<th>
+			@Html.DisplayNameFor(model => model.Ticket.Objet)
+		</th>
+
+	</tr>
+
+	@foreach (var item in Model)
+	{
+		<tr>
+			<td>
+				@Html.DisplayFor(modelItem => item.IdMessage)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.ContentMessage)
+			</td>
+			<th>
+				@Html.DisplayFor(modelItem => item.EtatMessage)
+			</th>
+			<td>
+				@Html.DisplayFor(modelItem => item.DateMessage)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Envoyeur.Nom)
+			</td>
+			<td>
+				@Html.DisplayFor(modelItem => item.Ticket.Objet)
+			</td>
+
+		</tr>
+	}
+
+</table>

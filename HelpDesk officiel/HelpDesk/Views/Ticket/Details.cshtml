@@ -1,0 +1,93 @@
+﻿@model HelpDesk.Models.Ticket
+
+
+@{
+	ViewBag.Title = "Details";
+}
+		<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+			<h4 class="title2">Détail de Ticket :</h4>
+			<div class="panel panel-default">
+				<div class="panel-heading" role="tab" id="headingOne">
+					<small class="pull-right text-muted">
+						<label>@Html.DisplayNameFor(model => model.DateOuverture) :</label>
+						<span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(model => model.DateOuverture)
+					</small><br />
+					@if (Model.EtatTicket == "Cloturé")
+					{	<small class="pull-right text-muted">
+						<label>@Html.DisplayNameFor(model => model.DateFermeture) :</label>
+						<span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(model => model.DateFermeture)
+					</small>
+					}
+
+
+					<label>@Html.DisplayNameFor(model => model.Objet) : </label>
+					<span>@Html.DisplayFor(model => model.Objet)</span><br />
+
+					<label>@Html.DisplayNameFor(model => model.Categorie) : </label>
+					<span>@Html.DisplayFor(model => model.Categorie.NomCategorie)</span><br />
+
+					<label>@Html.DisplayNameFor(model => model.Priorite) : </label>
+					<span>@Html.DisplayFor(model => model.Priorite)</span><br />
+
+					<label>@Html.DisplayNameFor(model => model.Expediteur) : </label>
+					<span>@Html.DisplayFor(model => model.Expediteur.Nom)</span><br />
+				</div>
+				<div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+					<div class="panel-body">
+						@Html.DisplayFor(model => model.Description)
+					</div>
+				</div>
+			</div>
+			@using (Html.BeginForm())
+			{
+
+				@Html.AntiForgeryToken()
+
+				<div class="form-horizontal">
+
+					<hr />
+					@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+					<div class="form-group">
+
+						<div class="col-md-10">
+							@Html.HiddenFor(model => model.IdTicket, new { htmlAttributes = new { @class = "form-control" } })
+							@Html.ValidationMessageFor(model => model.IdTicket, "", new { @class = "text-danger" })
+						</div>
+					</div>
+					<div class="form-group">
+						<div class="col-md-offset-2 col-md-10">
+							<input type="submit" value="Résoudre le Ticket" class="btn btn-default" />
+						</div>
+					</div>
+
+				</div>
+			}
+
+		</div>
+
+@using GridMvc.Html
+
+@{ 
+
+    HelpDesk.Models.Ticket_Historique t = new HelpDesk.Models.Ticket_Historique();
+   
+   
+}
+
+<h2>Historique</h2>
+
+
+@Html.Grid(t.find_all(Model.IdTicket)).Columns(columns =>
+{
+
+    columns.Add(foo => foo.Technicien.Nom).Titled("Tichnicien").Sortable(true);
+
+    columns.Add(foo => foo.Date).Titled("Date d'intervention").Sortable(true);
+    columns.Add(foo => foo.Ticket.EtatTicket).Titled("Etat").Sortable(true);
+
+
+
+}
+
+
+).WithPaging(10)

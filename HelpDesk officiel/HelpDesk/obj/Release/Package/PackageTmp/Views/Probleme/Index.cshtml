@@ -1,0 +1,94 @@
+﻿@model HelpDesk.Models.Probleme
+@{
+	var _user = Session["user"];
+}
+
+
+
+
+@using (Html.BeginForm())
+{
+	@Html.AntiForgeryToken()
+
+	<div class="form-horizontal">
+
+		<hr />
+		<div class="search-box">
+
+			@Html.ValidationSummary(true, "", new { @class = "text-danger" })
+			<div class="form-group">
+				@Html.Label("Rechercher", htmlAttributes: new { @class = "control-label col-md-4" })
+				<div class="col-md-10">
+					@Html.EditorFor(model => model.ObjetProbleme, new { htmlAttributes = new { @class = "sb-search-input input__field--madoka", @type = "search", @id = "input-31", @placeholder = "Search..." } })
+					@Html.ValidationMessageFor(model => model.ObjetProbleme, "", new { @class = "text-danger" })
+				</div>
+			</div>
+
+
+
+
+		</div>
+		<div class="form-group">
+			<div class="col-md-offset-2 col-md-10">
+
+				<div hidden="hidden">   <input type="submit" value="Rechercher" class="btn btn-default" /></div>
+			</div>
+		</div>
+	</div>
+}
+
+
+<div class="media">
+	<h3 class="title1">Base de Connaissance</h3>
+	<div class="bs-example5 widget-shadow" data-example-id="default-media">
+	
+		@if (_user.GetType() == typeof(HelpDesk.Models.Superviseur))
+		{
+			@Html.ActionLink("Ajouter un nouveau Problème", "Create", "Probleme")
+
+			foreach (var item in Model.find_all())
+			{
+				HelpDesk.Models.Superviseur superviseur = Session["user"] as HelpDesk.Models.Superviseur;
+				if (superviseur.direction.IdDirection == item.categorie.direction.IdDirection)
+				{
+		<div class="media">
+			<div class="media-body">
+				<small class="pull-right text-muted">
+					@Html.DisplayFor(model => model.categorie.NomCategorie)
+				</small>
+				<h4 class="media-heading">@Html.DisplayFor(modelItem => item.ObjetProbleme)</h4>
+				@Html.DisplayFor(modelItem => item.DescreptionProbleme)
+			</div>
+			@Html.ActionLink("Voir la Solution", "Details", new { id = item.IdProbleme })
+			<div class="clearfix"> </div>
+		</div>
+				}
+			}
+		}
+		else
+		{
+			if (_user.GetType() == typeof(HelpDesk.Models.TechnicienHelpDesk))
+			{
+
+				foreach (var item in Model.find_all())
+				{
+					HelpDesk.Models.TechnicienHelpDesk technicien = Session["user"] as HelpDesk.Models.TechnicienHelpDesk;
+					if (technicien.direction.IdDirection == item.categorie.direction.IdDirection)
+					{
+					<div class="media">
+						<div class="media-body">
+							<small class="pull-right text-muted">
+								@Html.DisplayFor(model => model.categorie.NomCategorie)
+							</small>
+							<h4 class="media-heading">@Html.DisplayFor(modelItem => item.ObjetProbleme)</h4>
+							@Html.DisplayFor(modelItem => item.DescreptionProbleme)
+						</div>
+						@Html.ActionLink("Voir la Solution", "Details", new { id = item.IdProbleme })
+						<div class="clearfix"> </div>
+					</div>
+				}
+			}
+		}
+		}
+	</div>
+</div>

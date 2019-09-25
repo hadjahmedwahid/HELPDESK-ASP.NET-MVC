@@ -1,0 +1,46 @@
+﻿@model IEnumerable<HelpDesk.Models.Message>
+@{
+	HelpDesk.Models.Ticket _ticket = Session["ticket"] as HelpDesk.Models.Ticket;
+}
+@if (_ticket == null)
+{
+
+}
+else
+{
+	<h4>Message :</h4>
+			foreach (var item in Model)
+			{
+				if (item.Ticket.IdTicket == _ticket.IdTicket)
+				{
+					
+						<div class="panel panel-success">
+							<div class="panel-heading"><strong class="primary-font">@item.Envoyeur.Nom</strong>
+							<small class="pull-right text-muted">
+								<span class="glyphicon glyphicon-time"></span>@item.DateMessage
+							</small>
+								</div>
+							<div class="panel-body">
+							<p>
+								@item.ContentMessage
+								</p>
+							</div> 
+						</div>
+					
+							
+				}
+			}
+}
+
+
+
+@*<div class="panel-footer">
+	<div class="input-group">
+		<input id="btn-input" type="text" class="form-control input-sm" placeholder="Type your message here...">
+		<span class="input-group-btn">
+			<button class="btn btn-warning btn-sm" id="btn-chat">
+				Send
+			</button>
+		</span>
+	</div>
+</div>*@

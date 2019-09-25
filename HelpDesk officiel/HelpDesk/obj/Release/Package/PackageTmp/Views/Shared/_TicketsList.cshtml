@@ -1,0 +1,106 @@
+﻿@model IEnumerable<HelpDesk.Models.Ticket>
+@using HelpDesk.Models;
+@{
+	var _user = Session["user"];
+}
+
+@if (_user.GetType() == typeof(Superviseur))
+{
+	Superviseur superviseur = Session["user"] as Superviseur;
+	<div class="panel-body widget-shadow">
+		<table class="table">
+			<thead>
+				<tr>
+					<th>@Html.DisplayNameFor(model => model.IdTicket)</th>
+					<th>@Html.DisplayNameFor(model => model.Objet)</th>
+					<th>@Html.DisplayNameFor(model => model.Categorie)</th>
+					<th>@Html.DisplayNameFor(model => model.DateOuverture)</th>
+					<th>@Html.DisplayNameFor(model => model.Priorite)</th>
+					<th>@Html.DisplayNameFor(model => model.EtatTicket)</th>
+				</tr>
+			</thead>
+			<tbody>
+				@foreach (var item in Model)
+				{
+					var time = DateTime.Now - item.DateFermeture;
+					if (superviseur.direction.IdDirection == item.Categorie.direction.IdDirection )
+					{
+						if (item.EtatTicket == "Cloturé" && (time.Hours > 2 || time.Days > 1))
+						{ }
+						else
+						{
+					<tr>
+						<th scope="row">@Html.DisplayFor(modelItem => item.IdTicket)</th>
+						<td>@Html.DisplayFor(modelItem => item.Objet)</td>
+						<td>@Html.DisplayFor(modelItem => item.Categorie.NomCategorie)</td>
+						<td>@Html.DisplayFor(modelItem => item.DateOuverture)</td>
+									@{
+										var pri = item.Priorite == "Urgent" ? "down" : "";
+										var level = item.Priorite == "Urgent" ? "fa fa-level-up" : "fa fa-level-down";
+							<td><h5 class="@pri">@Html.DisplayFor(modelItem => item.Priorite)<i class="@level"></i></h5></td>
+										var state = item.EtatTicket == "Nouveau" ? "label label-danger" : item.EtatTicket == "En attente" ? "label label-warning" : item.EtatTicket == "En cours" ? "label label-info" : "label label-success";
+							<td><span class="@state">@Html.DisplayFor(modelItem => item.EtatTicket)</span></td>
+						}
+						<td>@Html.ActionLink("Voir les details", "Details", new { id = item.IdTicket })</td>
+					</tr>
+												}
+											}
+										}
+			</tbody>
+		</table>
+	</div>
+}
+
+@if (_user.GetType() == typeof(TechnicienHelpDesk))
+{
+	TechnicienHelpDesk technicienHelpDesk = Session["user"] as TechnicienHelpDesk;
+
+	foreach (var item in Model)
+	{
+
+		var state = item.EtatTicket == "Nouveau" ? "panel panel-danger" : item.EtatTicket == "En attente" ? "panel panel-warning" : item.EtatTicket == "En cours" ? "panel panel-info" : "panel panel-success";
+		var state2 = item.EtatTicket == "Nouveau" ? "label label-danger" : item.EtatTicket == "En attente" ? "label label-warning" : item.EtatTicket == "En cours" ? "label label-info" : "label label-success";
+
+		var time = DateTime.Now - item.DateFermeture;
+		if (technicienHelpDesk.direction.IdDirection == item.Categorie.direction.IdDirection )
+		{
+			var url = "Ticket/Details/" + item.IdTicket;
+			if (item.EtatTicket == "Cloturé" && (time.Hours > 2 || time.Days > 1))
+			{ }
+			else
+			{
+			<a href="@url">
+
+				<div class="panel-group tool-tips widget-shadow" id="accordion" role="tablist" aria-multiselectable="true">
+					<div class="@state">
+						<div class="panel-heading" role="tab" id="headingOne">
+							<small class="pull-right text-muted">
+								<span class="@state2">@Html.DisplayFor(modelItem => item.EtatTicket)</span>
+							</small><br />
+							<small class="pull-right text-muted">
+								<label>@Html.DisplayNameFor(model => model.DateOuverture) :</label>
+								<span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(model => item.DateOuverture)
+							</small><br />
+							@if (item.EtatTicket == "Cloturé")
+							{	<small class="pull-right text-muted">
+								<label>@Html.DisplayNameFor(model => model.DateFermeture) :</label>
+								<span class="glyphicon glyphicon-time"></span>@Html.DisplayFor(model => item.DateFermeture)
+							</small>
+							}
+							
+							<label>@Html.DisplayNameFor(model => model.Objet) : </label>
+							<span>@Html.DisplayFor(model => item.Objet)</span><br />
+
+							<label>@Html.DisplayNameFor(model => model.Categorie) : </label>
+							<span>@Html.DisplayFor(model => item.Categorie.NomCategorie)</span><br />
+
+							<label>@Html.DisplayNameFor(model => model.Priorite) : </label>
+							<span>@Html.DisplayFor(model => item.Priorite)</span><br />
+						</div>
+					</div>
+				</div>
+			</a>
+			}
+		}
+	}
+}

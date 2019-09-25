@@ -1,0 +1,61 @@
+﻿@model HelpDesk.Models.Agence
+
+@{
+	ViewBag.Title = "Index";
+}
+		<div class="panel-body widget-shadow">
+			<h2>Index</h2>
+
+			<p>
+				@Html.ActionLink("Create New", "Create")
+			</p>
+			<table class="table">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.IdAgence)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.NomAgence)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.AdresseAgence)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.WilayaAgence)
+					</th>
+
+					<th>
+						@Html.DisplayNameFor(model => model.Dre)
+					</th>
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model.find_all())
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.IdAgence)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.NomAgence)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.AdresseAgence)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.WilayaAgence)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Dre.NomDRE)
+						</td>
+
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.IdAgence }) |
+							@Html.ActionLink("Details", "Details", new { id = item.IdAgence }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.IdAgence })
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>

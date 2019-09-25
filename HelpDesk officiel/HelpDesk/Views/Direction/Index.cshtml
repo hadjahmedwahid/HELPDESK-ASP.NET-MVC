@@ -1,0 +1,50 @@
+﻿@model HelpDesk.Models.Direction
+
+@{
+	ViewBag.Title = "Index";
+}
+
+		<div class="panel-body widget-shadow">
+			<h2>Index</h2>
+
+			<p>
+				@Html.ActionLink("Create New", "Create")
+			</p>
+			<table class="table">
+				<tr>
+					<th>
+						@Html.DisplayNameFor(model => model.IdDirection)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.NomDirection)
+					</th>
+					<th>
+						@Html.DisplayNameFor(model => model.Libelle)
+					</th>
+					<th></th>
+				</tr>
+
+				@foreach (var item in Model.find_all())
+				{
+					<tr>
+						<td>
+							@Html.DisplayFor(modelItem => item.IdDirection)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.NomDirection)
+						</td>
+						<td>
+							@Html.DisplayFor(modelItem => item.Libelle)
+						</td>
+						<td>
+							@Html.ActionLink("Edit", "Edit", new { id = item.IdDirection }) |
+							@Html.ActionLink("Details", "Details", new { id = item.IdDirection }) |
+							@Html.ActionLink("Delete", "Delete", new { id = item.IdDirection })
+						</td>
+					</tr>
+				}
+
+			</table>
+		</div>
+	</div>
+</div>
